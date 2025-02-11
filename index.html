@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon RPG</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="intro" class="tela">
+        <h1>Pokémon RPG</h1>
+        <p>Clique para começar</p>
+    </div>
+
+    <div id="historia" class="tela oculto">
+        <div id="texto-historia">
+            <p id="dialogo">Olá, jovem treinador! Bem-vindo ao mundo dos Pokémon.</p>
+        </div>
+        <button id="proximo-texto">Próximo</button>
+    </div>
+
+    <div id="tela-nome" class="tela oculto">
+        <h2>Qual é o seu nome?</h2>
+        <input type="text" id="nome-jogador">
+        <button id="confirmar-nome">Confirmar</button>
+    </div>
+
+    <div id="tela-inicial-pokemon" class="tela oculto">
+        <h2>Escolha seu Pokémon inicial:</h2>
+        <button class="pokemon-opcao" data-pokemon="Charmander">Charmander</button>
+        <button class="pokemon-opcao" data-pokemon="Bulbasaur">Bulbasaur</button>
+        <button class="pokemon-opcao" data-pokemon="Squirtle">Squirtle</button>
+    </div>
+
+    <div id="mapa" class="tela oculto">
+        <h2>Explore o mundo!</h2>
+        <p id="nome-exibido"></p>
+        <p id="pokemon-exibido"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
