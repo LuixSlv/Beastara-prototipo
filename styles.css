@@ -17,7 +17,12 @@ body {
     height: 100vh;
 }
 
+
 .oculto {
+    display: none;
+}
+
+.tela.oculto {
     display: none;
 }
 
@@ -45,8 +50,12 @@ body {
     margin-top: 10px;
 }
 
-.btn:hover {
-    background-color: #ff9900;
+.btn {
+    background-color: #ffcc00;
+    padding: 10px 20px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
 }
 
 input {
@@ -79,3 +88,8 @@ input {
 .pokemon-opcao:hover {
     background: rgba(255, 255, 255, 1);
 }
+
+.imagem-cidade {
+    width: 80%;
+}
+
