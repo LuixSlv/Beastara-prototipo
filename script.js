@@ -1,53 +1,70 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const intro = document.getElementById("intro");
-    const historia = document.getElementById("historia");
-    const telaNome = document.getElementById("tela-nome");
-    const telaPokemon = document.getElementById("tela-inicial-pokemon");
-    const mapa = document.getElementById("mapa");
+    const telas = {
+        intro: document.getElementById("intro"),
+        nome: document.getElementById("tela-nome"),
+        pokemon: document.getElementById("tela-inicial-pokemon"),
+        mapa: document.getElementById("mapa"),
+        rota1: document.getElementById("rota1"),
+        inventario: document.getElementById("inventario"),
+        configuracoes: document.getElementById("configuracoes")
+    };
 
     let nomeJogador = "";
     let pokemonEscolhido = "";
+    let inventario = [];
 
-    // Início do jogo
+    function mudarTela(telaAtual, proximaTela) {
+        telaAtual.classList.add("oculto");
+        proximaTela.classList.remove("oculto");
+    }
+
     document.getElementById("btn-iniciar").addEventListener("click", () => {
-        intro.classList.add("oculto");
-        historia.classList.remove("oculto");
+        mudarTela(telas.intro, telas.nome);
     });
 
-    // Sequência de história
-    const dialogos = [
-        "Olá, jovem treinador! Bem-vindo ao mundo dos Pokémon.",
-        "Meu nome é Professor Oak, e eu estudo essas incríveis criaturas!",
-        "Os Pokémon vivem em harmonia com os humanos e podem ser treinados para batalhas.",
-        "Mas antes de tudo... qual é o seu nome?"
-    ];
-    let indiceDialogo = 0;
-
-    document.getElementById("proximo-texto").addEventListener("click", () => {
-        if (indiceDialogo < dialogos.length - 1) {
-            indiceDialogo++;
-            document.getElementById("dialogo").textContent = dialogos[indiceDialogo];
-        } else {
-            historia.classList.add("oculto");
-            telaNome.classList.remove("oculto");
-        }
-    });
-
-    // Confirmar nome e ir para escolha de Pokémon
     document.getElementById("confirmar-nome").addEventListener("click", () => {
         nomeJogador = document.getElementById("nome-jogador").value;
-        if (nomeJogador.trim() !== "") {
-            telaNome.classList.add("oculto");
-            telaPokemon.classList.remove("oculto");
-        }
+        mudarTela(telas.nome, telas.pokemon);
     });
 
-    // Escolher Pokémon inicial e iniciar o jogo
     document.querySelectorAll(".pokemon-opcao").forEach(button => {
         button.addEventListener("click", () => {
             pokemonEscolhido = button.dataset.pokemon;
-            telaPokemon.classList.add("oculto");
-            mapa.classList.remove("oculto");
+            mudarTela(telas.pokemon, telas.mapa);
+        });
+    });
+
+    document.getElementById("ir-rota1").addEventListener("click", () => {
+        mudarTela(telas.mapa, telas.rota1);
+    });
+
+    document.getElementById("acao-encontrar-pokemon").addEventListener("click", () => {
+        let chanceShiny = Math.random() < 0.01;
+        let mensagem = chanceShiny ? "Você encontrou um Pokémon Shiny!" : "Você encontrou um Pokémon selvagem!";
+        document.getElementById("status-rota1").textContent = mensagem;
+    });
+
+    document.getElementById("acao-encontrar-item").addEventListener("click", () => {
+        if (Math.random() < 0.1) {
+            let item = "Pokébola";
+            inventario.push(item);
+            document.getElementById("status-rota1").textContent = "Você encontrou uma Pokébola!";
+        } else {
+            document.getElementById("status-rota1").textContent = "Você não encontrou nada...";
+        }
+    });
+
+    document.getElementById("abrir-inventario").addEventListener("click", () => {
+        document.getElementById("lista-itens").innerHTML = inventario.map(item => `<li>${item}</li>`).join("");
+        mudarTela(telas.mapa, telas.inventario);
+    });
+
+    document.getElementById("salvar-jogo").addEventListener("click", () => {
+        salvarJogo(nomeJogador, pokemonEscolhido, inventario);
+        alert("Jogo salvo!");
+    });
+});
+
 
             document.getElementById("nome-exibido").textContent = `Treinador: ${nomeJogador}`;
             document.getElementById("pokemon-exibido").textContent = `Pokémon Inicial: ${pokemonEscolhido}`;
