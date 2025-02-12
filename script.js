@@ -71,6 +71,19 @@ document.addEventListener("DOMContentLoaded", () => {
         mudarTela(telas.mapa, telas.inventario);
     });
 
+    document.getElementById("fechar-inventario").addEventListener("click", () => {
+    // Se quiser limpar ou esconder a lista de itens, pode fazer algo como:
+        document.getElementById("lista-itens").innerHTML = "";
+
+    // Muda a tela de volta para o mapa
+        mudarTela(telas.inventario, telas.mapa);
+    });
+
+    document.getElementById("abrir-config").addEventListener("click", () => {
+    // Muda para a tela de configurações
+        mudarTela(telas.mapa, telas.configuracoes);
+    });
+
     document.getElementById("salvar-jogo").addEventListener("click", () => {
         console.log("Salvando jogo...");
         salvarJogo(nomeJogador, pokemonEscolhido, inventario);
