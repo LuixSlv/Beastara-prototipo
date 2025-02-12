@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("fechar-inventario").addEventListener("click", () => {
     // Se quiser limpar ou esconder a lista de itens, pode fazer algo como:
-        document.getElementById("lista-itens").innerHTML = "";
+        //document.getElementById("lista-itens").innerHTML = "";
 
     // Muda a tela de volta para o mapa
         mudarTela(telas.inventario, telas.mapa);
