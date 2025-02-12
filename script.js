@@ -14,22 +14,33 @@ document.addEventListener("DOMContentLoaded", () => {
     let inventario = [];
 
     function mudarTela(telaAtual, proximaTela) {
-        telaAtual.classList.add("oculto");
-        proximaTela.classList.remove("oculto");
+        if (telaAtual && proximaTela) {
+            telaAtual.classList.add("oculto");
+            proximaTela.classList.remove("oculto");
+        } else {
+            console.error("Erro ao mudar de tela: uma das telas não foi encontrada.");
+        }
     }
 
     document.getElementById("btn-iniciar").addEventListener("click", () => {
+        console.log("Botão iniciar jogo clicado");
         mudarTela(telas.intro, telas.nome);
     });
 
     document.getElementById("confirmar-nome").addEventListener("click", () => {
-        nomeJogador = document.getElementById("nome-jogador").value;
-        mudarTela(telas.nome, telas.pokemon);
+        nomeJogador = document.getElementById("nome-jogador").value.trim();
+        if (nomeJogador) {
+            console.log(`Nome escolhido: ${nomeJogador}`);
+            mudarTela(telas.nome, telas.pokemon);
+        } else {
+            alert("Digite um nome antes de continuar!");
+        }
     });
 
     document.querySelectorAll(".pokemon-opcao").forEach(button => {
         button.addEventListener("click", () => {
             pokemonEscolhido = button.dataset.pokemon;
+            console.log(`Pokémon escolhido: ${pokemonEscolhido}`);
             mudarTela(telas.pokemon, telas.mapa);
         });
     });
@@ -48,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (Math.random() < 0.1) {
             let item = "Pokébola";
             inventario.push(item);
+            console.log(`Item encontrado: ${item}`);
             document.getElementById("status-rota1").textContent = "Você encontrou uma Pokébola!";
         } else {
             document.getElementById("status-rota1").textContent = "Você não encontrou nada...";
@@ -60,14 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("salvar-jogo").addEventListener("click", () => {
+        console.log("Salvando jogo...");
         salvarJogo(nomeJogador, pokemonEscolhido, inventario);
         alert("Jogo salvo!");
-    });
-});
-
-
-            document.getElementById("nome-exibido").textContent = `Treinador: ${nomeJogador}`;
-            document.getElementById("pokemon-exibido").textContent = `Pokémon Inicial: ${pokemonEscolhido}`;
-        });
     });
 });
