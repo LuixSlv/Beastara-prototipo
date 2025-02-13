@@ -1,47 +1,32 @@
-const dbName = "PokemonGameDB";
-const storeName = "saveData";
+let db;
 
-function openDB() {
-    return new Promise((resolve, reject) => {
-        const request = indexedDB.open(dbName, 1);
+function openDatabase() {
+    let request = indexedDB.open("pokemonGameDB", 1);
 
-        request.onupgradeneeded = function (event) {
-            let db = event.target.result;
-            if (!db.objectStoreNames.contains(storeName)) {
-                db.createObjectStore(storeName, { keyPath: "id" });
-            }
-        };
+    request.onupgradeneeded = function(event) {
+        let db = event.target.result;
+        db.createObjectStore("saves", { keyPath: "id" });
+    };
 
-        request.onsuccess = function (event) {
-            resolve(event.target.result);
-        };
-
-        request.onerror = function (event) {
-            reject("Erro ao abrir IndexedDB: " + event.target.error);
-        };
-    });
+    request.onsuccess = function(event) {
+        db = event.target.result;
+    };
 }
 
 function saveGame(data) {
-    openDB().then(db => {
-        const transaction = db.transaction(storeName, "readwrite");
-        const store = transaction.objectStore(storeName);
-        store.put({ id: "playerSave", ...data });
-    });
+    let transaction = db.transaction(["saves"], "readwrite");
+    let store = transaction.objectStore("saves");
+    store.put(data);
 }
 
 function loadGame(callback) {
-    openDB().then(db => {
-        const transaction = db.transaction(storeName, "readonly");
-        const store = transaction.objectStore(storeName);
-        const request = store.get("playerSave");
+    let transaction = db.transaction(["saves"], "readonly");
+    let store = transaction.objectStore("saves");
+    let request = store.get(1);
 
-        request.onsuccess = function () {
-            callback(request.result);
-        };
-
-        request.onerror = function () {
-            callback(null);
-        };
-    });
+    request.onsuccess = function() {
+        callback(request.result);
+    };
 }
+
+openDatabase();
