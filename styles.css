@@ -7,6 +7,8 @@ body {
     background-size: cover;
     background-position: center;
     color: white;
+    margin: 0;
+    padding: 0;
 }
 
 .tela {
@@ -16,7 +18,6 @@ body {
     justify-content: center;
     height: 100vh;
 }
-
 
 .oculto {
     display: none;
@@ -31,15 +32,16 @@ body {
     margin-bottom: 20px;
 }
 
-#texto-historia {
+#menu, #game {
     width: 80%;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     border: 2px solid white;
     border-radius: 10px;
+    box-shadow: 0 0 10px white;
 }
 
-.btn {
+button {
     background-color: #ffcc00;
     color: black;
     border: none;
@@ -48,14 +50,11 @@ body {
     cursor: pointer;
     border-radius: 10px;
     margin-top: 10px;
+    font-family: 'Press Start 2P', cursive;
 }
 
-.btn {
-    background-color: #ffcc00;
-    padding: 10px 20px;
-    border: none;
-    margin: 10px;
-    cursor: pointer;
+button:hover {
+    background-color: #ff9900;
 }
 
 input {
@@ -64,11 +63,17 @@ input {
     margin-top: 10px;
     border-radius: 5px;
     border: 2px solid white;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
 }
 
 .opcoes-pokemon {
     display: flex;
     gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .pokemon-opcao {
@@ -77,6 +82,7 @@ input {
     padding: 10px;
     cursor: pointer;
     border-radius: 10px;
+    text-align: center;
 }
 
 .pokemon-opcao img {
@@ -91,5 +97,6 @@ input {
 
 .imagem-cidade {
     width: 80%;
+    border: 2px solid white;
+    border-radius: 10px;
 }
-
