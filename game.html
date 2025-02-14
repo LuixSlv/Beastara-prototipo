@@ -7,17 +7,22 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
     <div id="game-container">
-        <h2>Cidade de Pallet</h2>
-        <button onclick="openMochila()">Mochila</button>
-        <button onclick="openPokemonMenu()">Pokémon</button>
-        <button onclick="openMissions()">Missões</button>
-        <button onclick="openSettings()">Configurações</button>
+        <h1 id="location-title">Pallet Town</h1>
+        <img id="location-image" src="images/pallet-town.jpg" alt="Pallet Town">
+        
+        <div id="menu">
+            <button onclick="goToRoute1()">Ir para Rota 1</button>
+            <button onclick="openBackpack()">Mochila</button>
+            <button onclick="openPokemon()">Pokémon</button>
+            <p>
+            <button onclick="openQuests()">Missões</button>
+            <button onclick="openSettings()">Configurações</button>
+            </p>
+        </div>
     </div>
 
     <script src="js/indexedDB.js"></script>
     <script src="js/game.js"></script>
-    <script src="js/pokemonMenu.js"></script>
 </body>
 </html>
