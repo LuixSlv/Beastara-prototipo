@@ -1,12 +1,12 @@
 function newGame() {
     localStorage.clear();
+    clearIndexedDB(); // Apaga saves antigos
     window.location.href = "game.html";
 }
 
 function continueGame() {
     loadGame(function(saveData) {
         if (saveData) {
-            localStorage.setItem("gameData", JSON.stringify(saveData));
             window.location.href = "game.html";
         } else {
             alert("Nenhum jogo salvo encontrado!");
