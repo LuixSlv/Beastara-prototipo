@@ -1,3 +1,52 @@
+const DB_NAME = "pokemonGameDB";
+const DB_VERSION = 1;
+const STORE_NAME = "saves";
+
+function openDB(callback) {
+    let request = indexedDB.open(DB_NAME, DB_VERSION);
+
+    request.onupgradeneeded = function (event) {
+        let db = event.target.result;
+        if (!db.objectStoreNames.contains(STORE_NAME)) {
+            db.createObjectStore(STORE_NAME, { keyPath: "id" });
+        }
+    };
+
+    request.onsuccess = function (event) {
+        let db = event.target.result;
+        callback(db);
+    };
+
+    request.onerror = function (event) {
+        console.error("Erro ao abrir o banco de dados!", event);
+    };
+}
+
+function saveGame(data) {
+    openDB(function (db) {
+        let transaction = db.transaction(STORE_NAME, "readwrite");
+        let store = transaction.objectStore(STORE_NAME);
+        store.put({ id: "save1", data: data });
+    });
+}
+
+function loadGame(callback) {
+    openDB(function (db) {
+        let transaction = db.transaction(STORE_NAME, "readonly");
+        let store = transaction.objectStore(STORE_NAME);
+        let request = store.get("save1");
+
+        request.onsuccess = function () {
+            callback(request.result ? request.result.data : null);
+        };
+
+        request.onerror = function () {
+            console.error("Erro ao carregar o jogo salvo.");
+            callback(null);
+        };
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     loadGame((data) => {
         if (!data) {
