@@ -14,6 +14,35 @@
         <button onclick="openSettings()">Configurações</button>
     </div>
 
+<!-- Modal para Mochila -->
+<div id="backpack-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('backpack-modal')">&times;</span>
+        <h2>Mochila</h2>
+        <p>Itens disponíveis:</p>
+        <ul id="inventory-list"></ul>
+    </div>
+</div>
+
+<!-- Modal para Pokémon -->
+<div id="pokemon-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('pokemon-modal')">&times;</span>
+        <h2>Equipe Pokémon</h2>
+        <div id="pokemon-list"></div>
+    </div>
+</div>
+
+<!-- Modal para Missões -->
+<div id="quests-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('quests-modal')">&times;</span>
+        <h2>Missões</h2>
+        <p>Missões disponíveis:</p>
+        <ul id="quests-list"></ul>
+    </div>
+</div>
+
     <script src="js/indexedDB.js"></script>
     <script src="js/menu.js"></script>
 </body>
