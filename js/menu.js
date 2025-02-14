@@ -17,3 +17,23 @@ function continueGame() {
 function openSettings() {
     alert("Configurações ainda não implementadas.");
 }
+
+function openBackpack() {
+    document.getElementById("backpack-modal").style.display = "block";
+    updateInventory();
+}
+
+function openPokemon() {
+    document.getElementById("pokemon-modal").style.display = "block";
+    updatePokemonList();
+}
+
+function openQuests() {
+    document.getElementById("quests-modal").style.display = "block";
+    updateQuests();
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
+
